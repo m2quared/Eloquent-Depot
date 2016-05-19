@@ -1,5 +1,5 @@
 {
-  "name": "gradcracker/eloquent-depot",
+  "name": "m2quared/eloquent-depot",
   "description": "Repositories to the database layer",
   "keywords": ["laravel", "repository", "eloquent", "model", "cache"],
   "license": "MIT",
