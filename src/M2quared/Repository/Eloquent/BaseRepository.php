@@ -600,6 +600,24 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     }
 
     /**
+     * Load relations counts.
+     *
+     * @param array|string $relations
+     *
+     * @return $this
+     */
+    public function withCount($relations)
+    {
+        if (is_string($relations)) {
+            $relations = func_get_args();
+        }
+
+        $this->model = $this->model->withCount($relations);
+
+        return $this;
+    }
+
+    /**
      * Set hidden fields.
      *
      * @param array $fields
