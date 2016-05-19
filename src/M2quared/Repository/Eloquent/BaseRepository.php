@@ -773,7 +773,7 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     }
 
     /**
-     * Apply scope in current Query.
+     * Apply scopes to current Query.
      *
      * @return $this
      */
