@@ -781,8 +781,8 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     {
         if (! empty($this->scopeQuery)) {
             foreach ($this->scopeQuery as $scope) {
-                if (is_callable($this->scope)) {
-                    $callback = $this->scope;
+                if (is_callable($scope)) {
+                    $callback = $scope;
                     $this->model = $callback($this->model);
                 }
             }
