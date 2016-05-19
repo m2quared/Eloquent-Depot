@@ -779,8 +779,8 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
      */
     protected function applyScope()
     {
-        if(!empty($this->scopeQuery)) {
-            foreach($this->scopeQuery as $scope) {
+        if (! empty($this->scopeQuery)) {
+            foreach ($this->scopeQuery as $scope) {
                 if (is_callable($this->scope)) {
                     $callback = $this->scope;
                     $this->model = $callback($this->model);
