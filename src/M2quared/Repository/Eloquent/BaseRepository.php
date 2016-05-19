@@ -77,7 +77,7 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     protected $skipPresenter = false;
 
     /**
-     * @var \Closure
+     * @var array
      */
     protected $scopeQuery = null;
 
@@ -244,7 +244,7 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
      */
     public function scopeQuery(\Closure $scope)
     {
-        $this->scopeQuery = $scope;
+        $this->scopeQuery[] = $scope;
 
         return $this;
     }
@@ -779,9 +779,13 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
      */
     protected function applyScope()
     {
-        if (isset($this->scopeQuery) && is_callable($this->scopeQuery)) {
-            $callback = $this->scopeQuery;
-            $this->model = $callback($this->model);
+        if(!empty($this->scopeQuery)) {
+            foreach($this->scopeQuery as $scope) {
+                if (is_callable($this->scope)) {
+                    $callback = $this->scope;
+                    $this->model = $callback($this->model);
+                }
+            }
         }
 
         return $this;
