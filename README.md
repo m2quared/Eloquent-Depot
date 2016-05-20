@@ -85,7 +85,9 @@ php artisan vendor:publish
 - updateOrCreate(array $attributes, array $values = [])
 - delete($id)
 - orderBy($column, $direction = 'asc');
-- with(array $relations);
+- with(array|string $relations);
+- withCount(array|string $relations)
+- limit($value)
 - hidden(array $fields);
 - visible(array $fields);
 - scopeQuery(Closure $scope);
