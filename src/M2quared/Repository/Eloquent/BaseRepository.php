@@ -270,7 +270,10 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
      */
     public function limit($limit)
     {
-        return $this->model->limit($limit);
+        $this->model = $this->model->limit($limit);
+
+        return $this;
+    }
     }
 
     /**
