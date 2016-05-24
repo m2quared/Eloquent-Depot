@@ -274,6 +274,21 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
 
         return $this;
     }
+
+    /**
+     * Add a basic where clause to the query.
+     *
+     * @param  string  $column
+     * @param  string  $operator
+     * @param  mixed   $value
+     * @param  string  $boolean
+     * @return $this
+     */
+    public function where($column, $operator = null, $value = null, $boolean = 'and')
+    {
+        $this->model = $this->model->where($column, $operator, $value, $boolean);
+
+        return $this;
     }
 
     /**
