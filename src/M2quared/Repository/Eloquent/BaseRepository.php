@@ -380,7 +380,7 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     {
         $this->applyCriteria();
         $this->applyScope();
-        $model = $this->model->findOrFail($id, $columns);
+        $model = $this->model->find($id, $columns);
         $this->resetModel();
 
         return $this->parserResult($model);
