@@ -876,4 +876,23 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
 
         return $result;
     }
+
+    /**
+     * Retrieve the "count" result of the query.
+     *
+     * @param  string  $columns
+     * @return int
+     */
+    public function count($columns = '*')
+    {
+        $this->applyCriteria();
+        $this->applyScope();
+
+        $result = $this->model->count($columns);
+
+        $this->resetModel();
+        $this->resetScope();
+
+        return $result;
+    }
 }
