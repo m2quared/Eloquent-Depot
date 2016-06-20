@@ -628,6 +628,13 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
         return $this;
     }
 
+    public function without($relations)
+    {
+        $this->model = $this->model->without($relations);
+
+        return $this;
+    }
+
     /**
      * Load relations counts.
      *
