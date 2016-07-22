@@ -903,4 +903,18 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
 
         return $result;
     }
+
+    public function whereIn($column, $values)
+    {
+        $this->model = $this->model->whereIn($column, $values);
+
+        return $this;
+    }
+
+    public function whereNotIn($column, $values)
+    {
+        $this->model = $this->model->whereNotIn($column, $values);
+
+        return $this;
+    }
 }
