@@ -330,6 +330,7 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
         $results = $this->model->first($columns);
 
         $this->resetModel();
+        $this->resetScope();
 
         return $this->parserResult($results);
     }
