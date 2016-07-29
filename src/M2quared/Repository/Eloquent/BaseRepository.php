@@ -700,6 +700,19 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     }
 
     /**
+     * Shuffle the rows in the result set.
+     *
+     * @param string $seed
+     * @return $this
+     */
+    public function rand($seed = '')
+    {
+        $this->model = $this->model->inRandomOrder($seed);
+
+        return $this;
+    }
+
+    /**
      * Set visible fields.
      *
      * @param array $fields
