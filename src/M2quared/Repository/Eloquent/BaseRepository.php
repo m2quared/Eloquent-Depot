@@ -286,6 +286,30 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
      */
     public function where($column, $operator = null, $value = null, $boolean = 'and')
     {
+        if (func_num_args() == 2 && is_null($operator)) {
+            return $this;
+        }
+
+        $this->model = $this->model->where($column, $operator, $value, $boolean);
+
+        return $this;
+    }
+
+    /**
+     * Add a basic where clause to the query, but only if the value is not null.
+     *
+     * @param  string  $column
+     * @param  string  $operator
+     * @param  mixed   $value
+     * @param  string  $boolean
+     * @return $this
+     */
+    public function whereSometimes($column, $operator = null, $value = null, $boolean = 'and')
+    {
+        if (func_num_args() == 2 && is_null($operator)) {
+            return $this;
+        }
+
         $this->model = $this->model->where($column, $operator, $value, $boolean);
 
         return $this;
