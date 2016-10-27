@@ -699,6 +699,13 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
         return $this;
     }
 
+    public function groupBy($column)
+    {
+        $this->model = $this->model->groupBy($column);
+
+        return $this;
+    }
+
     /**
      * Shuffle the rows in the result set.
      *
