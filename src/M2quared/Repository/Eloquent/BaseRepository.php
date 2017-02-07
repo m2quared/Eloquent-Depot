@@ -259,7 +259,9 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
      */
     public function lists($column, $key = null)
     {
-        return $this->makeModel()->lists($column, $key);
+        $this->applyScope();
+
+        return $this->model->lists($column, $key);
     }
 
     /**
