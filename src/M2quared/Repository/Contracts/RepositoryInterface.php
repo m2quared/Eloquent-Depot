@@ -191,29 +191,4 @@ interface RepositoryInterface
      * @return $this
      */
     public function resetScope();
-
-    /**
-     * Get Searchable Fields.
-     *
-     * @return array
-     */
-    public function getFieldsSearchable();
-
-    /**
-     * Set Presenter.
-     *
-     * @param $presenter
-     *
-     * @return mixed
-     */
-    public function setPresenter($presenter);
-
-    /**
-     * Skip Presenter Wrapper.
-     *
-     * @param bool $status
-     *
-     * @return $this
-     */
-    public function skipPresenter($status = true);
 }
