@@ -261,7 +261,12 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     {
         $this->applyScope();
 
-        return $this->model->lists($column, $key);
+        $result = $this->model->lists($column, $key);
+        
+        $this->resetModel();
+        $this->resetScope();
+        
+        return $result;
     }
 
     /**
