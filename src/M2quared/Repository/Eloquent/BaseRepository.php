@@ -92,6 +92,7 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
         $this->makePresenter();
         $this->makeValidator();
         $this->boot();
+        $this->globalScopes();
     }
 
     /**
