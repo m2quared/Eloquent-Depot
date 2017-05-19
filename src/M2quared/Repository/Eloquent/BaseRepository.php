@@ -2,9 +2,9 @@
 
 namespace M2quared\Repository\Eloquent;
 
-use Illuminate\Container\Container as Application;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Container\Container as Application;
 use M2quared\Repository\Contracts\RepositoryInterface;
 use M2quared\Repository\Events\RepositoryEntityCreated;
 use M2quared\Repository\Events\RepositoryEntityDeleted;
@@ -99,7 +99,7 @@ abstract class BaseRepository implements RepositoryInterface
     {
         $model = $this->app->make($this->model());
 
-        if (!$model instanceof Model) {
+        if (! $model instanceof Model) {
             throw new RepositoryException("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
         }
 
@@ -592,7 +592,7 @@ abstract class BaseRepository implements RepositoryInterface
             $this->globalScopes();
         }
 
-        if (!empty($this->scopeQuery)) {
+        if (! empty($this->scopeQuery)) {
             foreach ($this->scopeQuery as $scope) {
                 if (is_callable($scope)) {
                     $callback = $scope;
