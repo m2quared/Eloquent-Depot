@@ -82,6 +82,13 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     protected $scopeQuery = null;
 
     /**
+     * Should global scopes be applied.
+     *
+     * @var bool
+     */
+    public $withGlobalScopes = true;
+
+    /**
      * @param Application $app
      */
     public function __construct(Application $app)
@@ -92,7 +99,6 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
         $this->makePresenter();
         $this->makeValidator();
         $this->boot();
-        $this->globalScopes();
     }
 
     /**
@@ -110,6 +116,20 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     public function globalScopes()
     {
         //
+    }
+
+    /**
+     * Skip global scopes.
+     *
+     * @param bool $status
+     *
+     * @return $this
+     */
+    public function withoutGlobalScopes()
+    {
+        $this->withGlobalScopes = false;
+
+        return $this;
     }
 
     /**
@@ -857,8 +877,6 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     {
         $this->scopeQuery = null;
 
-        $this->globalScopes();
-
         return $this;
     }
 
@@ -869,6 +887,10 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
      */
     protected function applyScope()
     {
+        if ($this->withGlobalScopes) {
+            $this->globalScopes();
+        }
+
         if (! empty($this->scopeQuery)) {
             foreach ($this->scopeQuery as $scope) {
                 if (is_callable($scope)) {
