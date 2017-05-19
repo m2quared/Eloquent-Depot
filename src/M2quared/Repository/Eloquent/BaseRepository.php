@@ -2,17 +2,14 @@
 
 namespace M2quared\Repository\Eloquent;
 
-use Closure;
-use Exception;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Container\Container as Application;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use M2quared\Repository\Contracts\RepositoryInterface;
 use M2quared\Repository\Events\RepositoryEntityCreated;
 use M2quared\Repository\Events\RepositoryEntityDeleted;
 use M2quared\Repository\Events\RepositoryEntityUpdated;
 use M2quared\Repository\Exceptions\RepositoryException;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 /**
  * Class BaseRepository.
@@ -49,9 +46,6 @@ abstract class BaseRepository implements RepositoryInterface
         $this->boot();
     }
 
-    /**
-     *
-     */
     public function boot()
     {
         //
@@ -97,14 +91,15 @@ abstract class BaseRepository implements RepositoryInterface
     abstract public function model();
 
     /**
-     * @return Model
      * @throws RepositoryException
+     *
+     * @return Model
      */
     public function makeModel()
     {
         $model = $this->app->make($this->model());
 
-        if (! $model instanceof Model) {
+        if (!$model instanceof Model) {
             throw new RepositoryException("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
         }
 
@@ -148,7 +143,8 @@ abstract class BaseRepository implements RepositoryInterface
     /**
      * Set the "limit" value of the query.
      *
-     * @param  int  $value
+     * @param int $value
+     *
      * @return $this
      */
     public function limit($limit)
@@ -161,10 +157,11 @@ abstract class BaseRepository implements RepositoryInterface
     /**
      * Add a basic where clause to the query.
      *
-     * @param  string  $column
-     * @param  string  $operator
-     * @param  mixed   $value
-     * @param  string  $boolean
+     * @param string $column
+     * @param string $operator
+     * @param mixed  $value
+     * @param string $boolean
+     *
      * @return $this
      */
     public function where($column, $operator = null, $value = null, $boolean = 'and')
@@ -181,10 +178,11 @@ abstract class BaseRepository implements RepositoryInterface
     /**
      * Add a basic where clause to the query, but only if the value is not null.
      *
-     * @param  string  $column
-     * @param  string  $operator
-     * @param  mixed   $value
-     * @param  string  $boolean
+     * @param string $column
+     * @param string $operator
+     * @param mixed  $value
+     * @param string $boolean
+     *
      * @return $this
      */
     public function whereSometimes($column, $operator = null, $value = null, $boolean = 'and')
@@ -372,9 +370,10 @@ abstract class BaseRepository implements RepositoryInterface
     /**
      * Save a new entity in repository.
      *
-     * @throws ValidatorException
      *
      * @param array $attributes
+     *
+     * @throws ValidatorException
      *
      * @return mixed
      */
@@ -444,7 +443,6 @@ abstract class BaseRepository implements RepositoryInterface
     public function delete($id)
     {
         $this->applyScope();
-
 
         $model = $this->find($id);
         $originalModel = clone $model;
@@ -547,6 +545,7 @@ abstract class BaseRepository implements RepositoryInterface
      * Shuffle the rows in the result set.
      *
      * @param string $seed
+     *
      * @return $this
      */
     public function rand($seed = '')
@@ -569,7 +568,6 @@ abstract class BaseRepository implements RepositoryInterface
 
         return $this;
     }
-
 
     /**
      * Reset Query Scope.
@@ -594,7 +592,7 @@ abstract class BaseRepository implements RepositoryInterface
             $this->globalScopes();
         }
 
-        if (! empty($this->scopeQuery)) {
+        if (!empty($this->scopeQuery)) {
             foreach ($this->scopeQuery as $scope) {
                 if (is_callable($scope)) {
                     $callback = $scope;
@@ -605,8 +603,6 @@ abstract class BaseRepository implements RepositoryInterface
 
         return $this;
     }
-
-
 
     /**
      * Wrapper result data.
@@ -623,7 +619,8 @@ abstract class BaseRepository implements RepositoryInterface
     /**
      * Retrieve the "count" result of the query.
      *
-     * @param  string  $columns
+     * @param string $columns
+     *
      * @return int
      */
     public function count($columns = '*')
