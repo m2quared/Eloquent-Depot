@@ -4,23 +4,23 @@ namespace M2quared\Repository\Eloquent;
 
 use Closure;
 use Exception;
-use Illuminate\Container\Container as Application;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use M2quared\Repository\Contracts\CriteriaInterface;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use M2quared\Repository\Contracts\Presentable;
-use M2quared\Repository\Contracts\PresentableInterface;
+use Illuminate\Container\Container as Application;
+use M2quared\Repository\Contracts\CriteriaInterface;
+use M2quared\Validator\Contracts\ValidatorInterface;
 use M2quared\Repository\Contracts\PresenterInterface;
-use M2quared\Repository\Contracts\RepositoryCriteriaInterface;
+use M2quared\Validator\Exceptions\ValidatorException;
 use M2quared\Repository\Contracts\RepositoryInterface;
+use M2quared\Repository\Contracts\PresentableInterface;
 use M2quared\Repository\Events\RepositoryEntityCreated;
 use M2quared\Repository\Events\RepositoryEntityDeleted;
 use M2quared\Repository\Events\RepositoryEntityUpdated;
 use M2quared\Repository\Exceptions\RepositoryException;
-use M2quared\Validator\Contracts\ValidatorInterface;
-use M2quared\Validator\Exceptions\ValidatorException;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use M2quared\Repository\Contracts\RepositoryCriteriaInterface;
 
 /**
  * Class BaseRepository.
@@ -99,6 +99,16 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
      */
     public function boot()
     {
+    }
+
+    /**
+     * Set any scopes we want to apply globally.
+     *
+     * @return void
+     */
+    public function globalScopes()
+    {
+        //
     }
 
     /**
@@ -262,10 +272,10 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
         $this->applyScope();
 
         $result = $this->model->lists($column, $key);
-        
+
         $this->resetModel();
         $this->resetScope();
-        
+
         return $result;
     }
 
@@ -845,6 +855,8 @@ abstract class BaseRepository implements RepositoryInterface, RepositoryCriteria
     public function resetScope()
     {
         $this->scopeQuery = null;
+
+        $this->globalScopes();
 
         return $this;
     }
