@@ -121,10 +121,11 @@ interface RepositoryInterface
     /**
      * Update or Create an entity in repository.
      *
-     * @throws ValidatorException
      *
      * @param array $attributes
      * @param array $values
+     *
+     * @throws ValidatorException
      *
      * @return mixed
      */
