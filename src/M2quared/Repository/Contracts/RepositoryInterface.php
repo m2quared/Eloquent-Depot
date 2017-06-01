@@ -121,10 +121,11 @@ interface RepositoryInterface
     /**
      * Update or Create an entity in repository.
      *
-     * @throws ValidatorException
      *
      * @param array $attributes
      * @param array $values
+     *
+     * @throws ValidatorException
      *
      * @return mixed
      */
@@ -191,29 +192,4 @@ interface RepositoryInterface
      * @return $this
      */
     public function resetScope();
-
-    /**
-     * Get Searchable Fields.
-     *
-     * @return array
-     */
-    public function getFieldsSearchable();
-
-    /**
-     * Set Presenter.
-     *
-     * @param $presenter
-     *
-     * @return mixed
-     */
-    public function setPresenter($presenter);
-
-    /**
-     * Skip Presenter Wrapper.
-     *
-     * @param bool $status
-     *
-     * @return $this
-     */
-    public function skipPresenter($status = true);
 }

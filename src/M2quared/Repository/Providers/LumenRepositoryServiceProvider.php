@@ -23,7 +23,6 @@ class LumenRepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->commands('M2quared\Repository\Generators\Commands\RepositoryCommand');
         $this->app->register('M2quared\Repository\Providers\EventServiceProvider');
     }
 

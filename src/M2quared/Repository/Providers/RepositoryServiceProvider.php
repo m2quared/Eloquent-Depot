@@ -37,13 +37,6 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // $this->commands('M2quared\Repository\Generators\Commands\RepositoryCommand');
-        // $this->commands('M2quared\Repository\Generators\Commands\TransformerCommand');
-        // $this->commands('M2quared\Repository\Generators\Commands\PresenterCommand');
-        // $this->commands('M2quared\Repository\Generators\Commands\EntityCommand');
-        // $this->commands('M2quared\Repository\Generators\Commands\ValidatorCommand');
-        // $this->commands('M2quared\Repository\Generators\Commands\ControllerCommand');
-        // $this->commands('M2quared\Repository\Generators\Commands\BindingsCommand');
         $this->app->register('M2quared\Repository\Providers\EventServiceProvider');
     }
 
