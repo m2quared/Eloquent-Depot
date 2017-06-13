@@ -15,7 +15,7 @@ interface RepositoryInterface
      *
      * @return \Illuminate\Support\Collection|array
      */
-    public function lists($column, $key = null);
+    public function pluck($column, $key = null);
 
     /**
      * Retrieve all data of repository.
