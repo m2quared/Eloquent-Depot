@@ -128,11 +128,11 @@ abstract class BaseRepository implements RepositoryInterface
      *
      * @return \Illuminate\Support\Collection|array
      */
-    public function lists($column, $key = null)
+    public function pluck($column, $key = null)
     {
         $this->applyScope();
 
-        $result = $this->model->lists($column, $key);
+        $result = $this->model->pluck($column, $key);
 
         $this->resetModel();
         $this->resetScope();
