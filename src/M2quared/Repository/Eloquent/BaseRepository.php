@@ -197,6 +197,20 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
+     * Add a whereNull clause to the query.
+     *
+     * @param string $columns
+     *
+     * @return mixed
+     */
+    public function whereNull($column)
+    {
+        $this->model = $this->model->whereNull($column);
+        
+        return $this;
+    }
+
+    /**
      * Retrieve all data of repository.
      *
      * @param array $columns
