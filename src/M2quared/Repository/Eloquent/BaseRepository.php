@@ -206,7 +206,7 @@ abstract class BaseRepository implements RepositoryInterface
     public function whereNull($column)
     {
         $this->model = $this->model->whereNull($column);
-        
+
         return $this;
     }
 
