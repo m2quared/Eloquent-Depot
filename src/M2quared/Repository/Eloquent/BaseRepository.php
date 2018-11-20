@@ -442,7 +442,6 @@ abstract class BaseRepository implements RepositoryInterface
         return $this;
     }
 
-
     /**
      * Shuffle the rows in the result set.
      *
@@ -539,7 +538,7 @@ abstract class BaseRepository implements RepositoryInterface
 
     public function __call($name, $args)
     {
-        if(! method_exists($this, $name)) {
+        if (! method_exists($this, $name)) {
             $this->model = $this->model->$name(...$args);
 
             return $this;
