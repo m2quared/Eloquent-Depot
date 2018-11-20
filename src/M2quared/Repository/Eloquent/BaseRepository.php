@@ -141,41 +141,6 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * Set the "limit" value of the query.
-     *
-     * @param int $value
-     *
-     * @return $this
-     */
-    public function limit($limit)
-    {
-        $this->model = $this->model->limit($limit);
-
-        return $this;
-    }
-
-    /**
-     * Add a basic where clause to the query.
-     *
-     * @param string $column
-     * @param string $operator
-     * @param mixed  $value
-     * @param string $boolean
-     *
-     * @return $this
-     */
-    public function where($column, $operator = null, $value = null, $boolean = 'and')
-    {
-        if (func_num_args() == 2 && is_null($operator)) {
-            return $this;
-        }
-
-        $this->model = $this->model->where($column, $operator, $value, $boolean);
-
-        return $this;
-    }
-
-    /**
      * Add a basic where clause to the query, but only if the value is not null.
      *
      * @param string $column
@@ -192,20 +157,6 @@ abstract class BaseRepository implements RepositoryInterface
         }
 
         $this->model = $this->model->where($column, $operator, $value, $boolean);
-
-        return $this;
-    }
-
-    /**
-     * Add a whereNull clause to the query.
-     *
-     * @param string $columns
-     *
-     * @return mixed
-     */
-    public function whereNull($column)
-    {
-        $this->model = $this->model->whereNull($column);
 
         return $this;
     }
@@ -471,63 +422,6 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-     * Check if entity has relation.
-     *
-     * @param string $relation
-     *
-     * @return $this
-     */
-    public function has($relation)
-    {
-        $this->model = $this->model->has($relation);
-
-        return $this;
-    }
-
-    /**
-     * Load relations.
-     *
-     * @param array|string $relations
-     *
-     * @return $this
-     */
-    public function with($relations)
-    {
-        if (is_string($relations)) {
-            $relations = func_get_args();
-        }
-
-        $this->model = $this->model->with($relations);
-
-        return $this;
-    }
-
-    public function without($relations)
-    {
-        $this->model = $this->model->without($relations);
-
-        return $this;
-    }
-
-    /**
-     * Load relations counts.
-     *
-     * @param array|string $relations
-     *
-     * @return $this
-     */
-    public function withCount($relations)
-    {
-        if (is_string($relations)) {
-            $relations = func_get_args();
-        }
-
-        $this->model = $this->model->withCount($relations);
-
-        return $this;
-    }
-
-    /**
      * Set hidden fields.
      *
      * @param array $fields
@@ -548,12 +442,6 @@ abstract class BaseRepository implements RepositoryInterface
         return $this;
     }
 
-    public function groupBy($column)
-    {
-        $this->model = $this->model->groupBy($column);
-
-        return $this;
-    }
 
     /**
      * Shuffle the rows in the result set.
@@ -649,17 +537,14 @@ abstract class BaseRepository implements RepositoryInterface
         return $result;
     }
 
-    public function whereIn($column, $values)
+    public function __call($name, $args)
     {
-        $this->model = $this->model->whereIn($column, $values);
+        if(! method_exists($this, $name)) {
+            $this->model = $this->model->$name(...$args);
 
-        return $this;
-    }
+            return $this;
+        }
 
-    public function whereNotIn($column, $values)
-    {
-        $this->model = $this->model->whereNotIn($column, $values);
-
-        return $this;
+        return $this->$name(...$args);
     }
 }
