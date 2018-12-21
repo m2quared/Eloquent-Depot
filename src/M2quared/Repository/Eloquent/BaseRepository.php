@@ -662,4 +662,16 @@ abstract class BaseRepository implements RepositoryInterface
 
         return $this;
     }
+    
+    public function max($column)
+    {
+        $this->applyScope();
+
+        $result = $this->model->max($column);
+
+        $this->resetModel();
+        $this->resetScope();
+
+        return $result;
+    }
 }
