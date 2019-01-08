@@ -151,15 +151,6 @@ interface RepositoryInterface
     public function orderBy($column, $direction = 'asc');
 
     /**
-     * Load relations.
-     *
-     * @param $relations
-     *
-     * @return $this
-     */
-    public function with($relations);
-
-    /**
      * Set hidden fields.
      *
      * @param array $fields
